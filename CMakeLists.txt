@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.21)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS True)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_EXPORT_COMPILE_COMMANDS True)
+project(CPP_PRIMER)
+message(STATUS "operating system: ${CMAKE_HOST_SYSTEM_NAME}-${CMAKE_HOST_SYSTEM_VERSION}")
+
+add_executable(chapter_11 ${CMAKE_CURRENT_SOURCE_DIR}/app/chapter_11.cpp)
