@@ -66,6 +66,24 @@ void func_10_6() {
   SPDLOG_INFO("after a: {}", fmt::format("{}", a));
 }
 
+void func_10_7() {
+  SPDLOG_INFO("\n---------- func_10_7 ----------");
+  std::list<int32_t> a = {1, 1, 2, 2, 2, 3};
+  std::vector<int32_t> b;
+  SPDLOG_INFO("before a: {}", fmt::format("{}", a));
+  SPDLOG_INFO("before b: {}", fmt::format("{}", b));
+  //
+  std::copy(a.cbegin(), a.cend(), std::back_inserter(b));
+  SPDLOG_INFO("after a: {}", fmt::format("{}", a));
+  SPDLOG_INFO("after b: {}", fmt::format("{}", b));
+  //
+  std::vector<int32_t> c;
+  //   c.reserve(10);
+  c.resize(10);
+  std::fill_n(c.begin(), 10, 0);
+  SPDLOG_INFO("c: {}", fmt::format("{}", c));
+}
+
 int main(int argc, char *args[]) {
   //
   spdlog::set_level(spdlog::level::debug); // Set global log level to debug
@@ -75,6 +93,7 @@ int main(int argc, char *args[]) {
   func_10_2();
   func_10_3();
   func_10_6();
+  func_10_7();
 
   return 0;
 }
