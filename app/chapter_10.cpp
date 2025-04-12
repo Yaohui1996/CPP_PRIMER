@@ -84,6 +84,19 @@ void func_10_7() {
   SPDLOG_INFO("c: {}", fmt::format("{}", c));
 }
 
+void func_10_9() {
+  SPDLOG_INFO("\n---------- func_10_9 ----------");
+  auto elim_dups = [](std::vector<int32_t> &vec) -> void {
+    std::sort(vec.begin(), vec.end());
+    const auto unique_end = std::unique(vec.begin(), vec.end());
+    vec.erase(unique_end, vec.end());
+  };
+  std::vector<int32_t> a = {3, 3, 3, 3, 3, 2, 2, 2, 2, 1, 1};
+  SPDLOG_INFO("before a: {}", fmt::format("{}", a));
+  elim_dups(a);
+  SPDLOG_INFO("after a: {}", fmt::format("{}", a));
+}
+
 int main(int argc, char *args[]) {
   //
   spdlog::set_level(spdlog::level::debug); // Set global log level to debug
@@ -94,6 +107,7 @@ int main(int argc, char *args[]) {
   func_10_3();
   func_10_6();
   func_10_7();
+  func_10_9();
 
   return 0;
 }
