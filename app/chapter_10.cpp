@@ -57,6 +57,15 @@ void func_10_3() {
   SPDLOG_INFO("the sum of a is: {}", result);
 }
 
+void func_10_6() {
+  SPDLOG_INFO("\n---------- func_10_6 ----------");
+  std::vector<int32_t> a = {1, 1, 2, 2, 2, 3};
+  SPDLOG_INFO("before a: {}", fmt::format("{}", a));
+  //
+  std::fill_n(a.begin(), a.size(), 0);
+  SPDLOG_INFO("after a: {}", fmt::format("{}", a));
+}
+
 int main(int argc, char *args[]) {
   //
   spdlog::set_level(spdlog::level::debug); // Set global log level to debug
@@ -65,6 +74,7 @@ int main(int argc, char *args[]) {
   func_10_1();
   func_10_2();
   func_10_3();
+  func_10_6();
 
   return 0;
 }
