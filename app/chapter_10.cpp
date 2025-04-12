@@ -8,9 +8,8 @@
 #include "spdlog/fmt/bundled/ranges.h"
 #include "spdlog/spdlog.h"
 
-int main(int argc, char *args[]) {
-  //
-  spdlog::set_level(spdlog::level::debug); // Set global log level to debug
+void draft() {
+  SPDLOG_INFO("\n---------- draft ----------");
   //
   int32_t ia[] = {27, 210, 12, 47, 109, 83};
   SPDLOG_INFO("ia=[{}]", fmt::join(ia, ","));
@@ -29,6 +28,23 @@ int main(int argc, char *args[]) {
 
   const auto result2 = std::find(list.cbegin(), list.cend(), val_str);
   SPDLOG_INFO("result2->{}", *result2);
+}
+
+void func_10_1() {
+  SPDLOG_INFO("\n---------- func_10_1 ----------");
+  const std::vector<int32_t> a = {1, 1, 2, 2, 2, 3};
+  SPDLOG_INFO("a: {}", fmt::format("{}", a));
+  const std::int32_t val = 2;
+  const auto result = std::count(a.cbegin(), a.cend(), val);
+  SPDLOG_INFO("the count of {} in the vector a is: {}", val, result);
+}
+
+int main(int argc, char *args[]) {
+  //
+  spdlog::set_level(spdlog::level::debug); // Set global log level to debug
+
+  draft();
+  func_10_1();
 
   return 0;
 }
