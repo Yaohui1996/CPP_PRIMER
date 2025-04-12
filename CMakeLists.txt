@@ -7,5 +7,21 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS True)
 project(CPP_PRIMER)
 message(STATUS "operating system: ${CMAKE_HOST_SYSTEM_NAME}-${CMAKE_HOST_SYSTEM_VERSION}")
 
+#define SPDLOG_LEVEL_TRACE 0
+#define SPDLOG_LEVEL_DEBUG 1
+#define SPDLOG_LEVEL_INFO 2
+#define SPDLOG_LEVEL_WARN 3
+#define SPDLOG_LEVEL_ERROR 4
+#define SPDLOG_LEVEL_CRITICAL 5
+#define SPDLOG_LEVEL_OFF 6
+add_compile_definitions(SPDLOG_ACTIVE_LEVEL=1)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog)
+
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include)
+
+link_libraries(spdlog::spdlog)
+
 add_executable(chapter_10 ${CMAKE_CURRENT_SOURCE_DIR}/app/chapter_10.cpp)
 add_executable(chapter_11 ${CMAKE_CURRENT_SOURCE_DIR}/app/chapter_11.cpp)

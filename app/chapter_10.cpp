@@ -1,14 +1,24 @@
+#include <algorithm>
 #include <cstdint>
-#include <iostream>
+#include <iterator>
 #include <vector>
 
-int main(int argc, char *args[]) {
-  std::vector<int32_t> a;
+#include "spdlog/fmt/bundled/ranges.h"
+#include "spdlog/spdlog.h"
 
-  int ia[] = {27, 210, 12, 47, 109, 83};
-  for (const auto item : ia) {
-    std::cout << item << std::endl;
-  }
+int main(int argc, char *args[]) {
+  //
+  spdlog::set_level(spdlog::level::debug); // Set global log level to debug
+  //
+  int32_t ia[] = {27, 210, 12, 47, 109, 83};
+  SPDLOG_INFO("ia=[{}]", fmt::join(ia, ","));
+
+  const int32_t val = 47;
+  SPDLOG_INFO("val={}", val);
+
+  //   yaohui::toolkits::print(val);
+  int32_t *result = std::find(std::begin(ia), std::end(ia), val);
+  SPDLOG_INFO("result->{}", *result);
 
   return 0;
 }
