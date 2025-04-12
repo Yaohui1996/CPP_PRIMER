@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cstdint>
+#include <functional>
 #include <iterator>
 #include <list>
 #include <numeric>
@@ -97,6 +98,28 @@ void func_10_9() {
   SPDLOG_INFO("after a: {}", fmt::format("{}", a));
 }
 
+void func_10_11() {
+  SPDLOG_INFO("\n---------- func_10_11 ----------");
+  //
+  auto is_shorter = [](const std::string &lhs, const std::string &rhs) -> bool {
+    return lhs.size() < rhs.size();
+  };
+  //
+  auto elim_dups = [](std::vector<std::string> &vec) -> void {
+    std::sort(vec.begin(), vec.end());
+    const auto unique_end = std::unique(vec.begin(), vec.end());
+    vec.erase(unique_end, vec.end());
+  };
+  //
+  std::vector<std::string> a = {"the",  "quick", "red",  "fox", "jumps",
+                                "over", "the",   "slow", "red", "turtle"};
+  SPDLOG_INFO("before a: {}", fmt::format("{}", a));
+  elim_dups(a);
+  SPDLOG_INFO("after a: {}", fmt::format("{}", a));
+  std::stable_sort(a.begin(), a.end(), is_shorter);
+  SPDLOG_INFO("after after a: {}", fmt::format("{}", a));
+}
+
 int main(int argc, char *args[]) {
   //
   spdlog::set_level(spdlog::level::debug); // Set global log level to debug
@@ -108,6 +131,7 @@ int main(int argc, char *args[]) {
   func_10_6();
   func_10_7();
   func_10_9();
+  func_10_11();
 
   return 0;
 }
