@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <iterator>
 #include <list>
+#include <numeric>
 #include <vector>
 
 #include "spdlog/fmt/bundled/format.h"
@@ -40,12 +41,20 @@ void func_10_1() {
 }
 
 void func_10_2() {
-  SPDLOG_INFO("\n---------- func_10_1 ----------");
+  SPDLOG_INFO("\n---------- func_10_2 ----------");
   const std::vector<std::string> a = {"1", "1", "2", "2", "2", "3"};
   SPDLOG_INFO("a: {}", fmt::format("{}", a));
   const std::string val = "2";
   const auto result = std::count(a.cbegin(), a.cend(), val);
   SPDLOG_INFO("the count of {} in the vector a is: {}", val, result);
+}
+
+void func_10_3() {
+  SPDLOG_INFO("\n---------- func_10_3 ----------");
+  const std::vector<int32_t> a = {1, 1, 2, 2, 2, 3};
+  SPDLOG_INFO("a: {}", fmt::format("{}", a));
+  const auto result = std::accumulate(a.cbegin(), a.cend(), 0);
+  SPDLOG_INFO("the sum of a is: {}", result);
 }
 
 int main(int argc, char *args[]) {
@@ -55,6 +64,7 @@ int main(int argc, char *args[]) {
   draft();
   func_10_1();
   func_10_2();
+  func_10_3();
 
   return 0;
 }
