@@ -1,8 +1,10 @@
 #include <algorithm>
 #include <cstdint>
 #include <iterator>
+#include <list>
 #include <vector>
 
+#include "spdlog/fmt/bundled/format.h"
 #include "spdlog/fmt/bundled/ranges.h"
 #include "spdlog/spdlog.h"
 
@@ -16,9 +18,17 @@ int main(int argc, char *args[]) {
   const int32_t val = 47;
   SPDLOG_INFO("val={}", val);
 
-  //   yaohui::toolkits::print(val);
   int32_t *result = std::find(std::begin(ia), std::end(ia), val);
   SPDLOG_INFO("result->{}", *result);
+
+  std::list<std::string> list = {"27", "210", "12", "47", "109", "83"};
+  SPDLOG_INFO("i={}", fmt::format("{}", list));
+
+  const std::string val_str = "47";
+  SPDLOG_INFO("val_str={}", val_str);
+
+  const auto result2 = std::find(list.cbegin(), list.cend(), val_str);
+  SPDLOG_INFO("result2->{}", *result2);
 
   return 0;
 }
