@@ -39,12 +39,22 @@ void func_10_1() {
   SPDLOG_INFO("the count of {} in the vector a is: {}", val, result);
 }
 
+void func_10_2() {
+  SPDLOG_INFO("\n---------- func_10_1 ----------");
+  const std::vector<std::string> a = {"1", "1", "2", "2", "2", "3"};
+  SPDLOG_INFO("a: {}", fmt::format("{}", a));
+  const std::string val = "2";
+  const auto result = std::count(a.cbegin(), a.cend(), val);
+  SPDLOG_INFO("the count of {} in the vector a is: {}", val, result);
+}
+
 int main(int argc, char *args[]) {
   //
   spdlog::set_level(spdlog::level::debug); // Set global log level to debug
 
   draft();
   func_10_1();
+  func_10_2();
 
   return 0;
 }
