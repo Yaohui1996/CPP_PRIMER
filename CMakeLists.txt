@@ -7,4 +7,5 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS True)
 project(CPP_PRIMER)
 message(STATUS "operating system: ${CMAKE_HOST_SYSTEM_NAME}-${CMAKE_HOST_SYSTEM_VERSION}")
 
+add_executable(chapter_10 ${CMAKE_CURRENT_SOURCE_DIR}/app/chapter_10.cpp)
 add_executable(chapter_11 ${CMAKE_CURRENT_SOURCE_DIR}/app/chapter_11.cpp)
