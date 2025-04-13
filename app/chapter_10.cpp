@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "Sales_data.h"
+#include "common_function.h"
 #include "spdlog/fmt/bundled/format.h"
 #include "spdlog/fmt/bundled/ranges.h"
 #include "spdlog/spdlog.h"
@@ -95,14 +96,9 @@ void func_10_7()
 void func_10_9()
 {
     SPDLOG_INFO("\n---------- {} ----------", __func__);
-    auto elim_dups = [](std::vector<int32_t> &vec) -> void {
-        std::sort(vec.begin(), vec.end());
-        const auto unique_end = std::unique(vec.begin(), vec.end());
-        vec.erase(unique_end, vec.end());
-    };
     std::vector<int32_t> a = {3, 3, 3, 3, 3, 2, 2, 2, 2, 1, 1};
     SPDLOG_INFO("before a: {}", fmt::format("{}", a));
-    elim_dups(a);
+    elimDups(a);
     SPDLOG_INFO("after a: {}", fmt::format("{}", a));
 }
 
@@ -110,28 +106,17 @@ void func_10_11()
 {
     SPDLOG_INFO("\n---------- {} ----------", __func__);
     //
-    auto is_shorter = [](const std::string &lhs, const std::string &rhs) -> bool { return lhs.size() < rhs.size(); };
-    //
-    auto elim_dups = [](std::vector<std::string> &vec) -> void {
-        std::sort(vec.begin(), vec.end());
-        const auto unique_end = std::unique(vec.begin(), vec.end());
-        vec.erase(unique_end, vec.end());
-    };
-    //
     std::vector<std::string> a = {"the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"};
     SPDLOG_INFO("before a: {}", fmt::format("{}", a));
-    elim_dups(a);
+    elimDups(a);
     SPDLOG_INFO("after a: {}", fmt::format("{}", a));
-    std::stable_sort(a.begin(), a.end(), is_shorter);
+    std::stable_sort(a.begin(), a.end(), isShorter);
     SPDLOG_INFO("after after a: {}", fmt::format("{}", a));
 }
 
 void func_10_12()
 {
     SPDLOG_INFO("\n---------- {} ----------", __func__);
-    //
-    auto compareIsbn = [](const Sales_data &lhs, const Sales_data &rhs) -> bool { return lhs.isbn() < rhs.isbn(); };
-    auto convert2isbn = [](const Sales_data &sd) -> std::string { return sd.isbn(); };
     //
     std::vector<Sales_data> a;
     for (const auto &isbn : std::vector<std::string>{
@@ -151,11 +136,11 @@ void func_10_12()
     }
     // convert
     std::vector<std::string> before;
-    std::transform(a.cbegin(), a.cend(), std::back_inserter(before), convert2isbn);
+    std::transform(a.cbegin(), a.cend(), std::back_inserter(before), convertToIsbn);
     SPDLOG_INFO("before a: {}", fmt::format("{}", before));
     std::sort(a.begin(), a.end(), compareIsbn);
     std::vector<std::string> after;
-    std::transform(a.cbegin(), a.cend(), std::back_inserter(after), convert2isbn);
+    std::transform(a.cbegin(), a.cend(), std::back_inserter(after), convertToIsbn);
     SPDLOG_INFO("after a: {}", fmt::format("{}", after));
 }
 
@@ -180,6 +165,42 @@ void func_10_14()
     SPDLOG_INFO("a : {}, b: {}, c: {}", a, b, c);
 }
 
+void func_10_15()
+{
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
+    //
+    int32_t a = 2;
+    auto lam = [a](const int32_t b) { return a + b; };
+    int32_t b = 3;
+    int32_t c = lam(b);
+    SPDLOG_INFO("a : {}, b: {}, c: {}", a, b, c);
+}
+
+void func_10_16()
+{
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
+    //
+    std::vector<std::string> words = {"the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"};
+    const std::size_t sz = 4;
+
+    auto my_biggies = [](std::vector<std::string> &words, const std::size_t sz) {
+        elimDups(words);
+        std::stable_sort(words.begin(), words.end(), [](const std::string &lhs, const std::string &rhs) -> bool {
+            return lhs.size() < rhs.size();
+        });
+        auto wc =
+            std::find_if(words.cbegin(), words.cend(), [sz](const std::string &s) -> bool { return s.size() >= sz; });
+        auto count = words.cend() - wc;
+        SPDLOG_INFO("count {} of length {} or longer", make_plural(count, "word", "s"), sz);
+        std::for_each(wc, words.cend(), [](const std::string &s) { std::cout << s << " "; });
+        std::cout << std::endl;
+    };
+    SPDLOG_INFO("my_biggies...");
+    my_biggies(words, sz);
+    SPDLOG_INFO("biggies...");
+    biggies(words, sz);
+}
+
 int main(int argc, char *args[])
 {
     //
@@ -196,6 +217,8 @@ int main(int argc, char *args[])
     func_10_12();
     func_10_13();
     func_10_14();
+    func_10_15();
+    func_10_16();
 
     return 0;
 }
