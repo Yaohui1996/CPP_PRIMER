@@ -159,6 +159,16 @@ void func_10_12()
     SPDLOG_INFO("after a: {}", fmt::format("{}", after));
 }
 
+void func_10_13()
+{
+    SPDLOG_INFO("\n---------- func_10_13 ----------");
+    //
+    std::vector<std::string> a = {"the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"};
+    SPDLOG_INFO("before a: {}", fmt::format("{}", a));
+    std::partition(a.begin(), a.end(), [](const std::string &s) -> bool { return s.size() < 5; });
+    SPDLOG_INFO("after a: {}", fmt::format("{}", a));
+}
+
 int main(int argc, char *args[])
 {
     //
@@ -173,6 +183,7 @@ int main(int argc, char *args[])
     func_10_9();
     func_10_11();
     func_10_12();
+    func_10_13();
 
     return 0;
 }
