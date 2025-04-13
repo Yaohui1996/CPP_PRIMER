@@ -45,6 +45,20 @@ void biggies(std::vector<std::string> &words, const std::size_t sz)
     std::cout << std::endl;
 }
 
+void biggies_partition(std::vector<std::string> &words, const std::size_t sz)
+{
+    elimDups(words);
+    std::stable_sort(words.begin(), words.end(),
+                     [](const std::string &lhs, const std::string &rhs) -> bool { return lhs.size() < rhs.size(); });
+    // auto wc = std::find_if(words.cbegin(), words.cend(), [sz](const std::string &s) -> bool { return s.size() >= sz;
+    // });
+    auto wc = std::partition(words.begin(), words.end(), [sz](const std::string &s) -> bool { return s.size() >= sz; });
+    auto count = words.cend() - wc;
+    SPDLOG_INFO("count {} of length {} or longer", make_plural(count, "word", "s"), sz);
+    std::for_each(words.begin(), wc, [](const std::string &s) { std::cout << s << " "; });
+    std::cout << std::endl;
+}
+
 std::string make_plural(const std::size_t ctr, const std::string &word, const std::string &ending)
 {
     return (ctr > 1) ? word + ending : word;
