@@ -201,6 +201,38 @@ void func_10_16()
     biggies(words, sz);
 }
 
+void func_10_17()
+{
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
+    //
+    std::vector<Sales_data> a;
+    for (const auto &isbn : std::vector<std::string>{
+             "978-3-16-148410-0",
+             "979-0-123-45678-5",
+             "978-1-2345-6789-2",
+             "979-8-7654-3210-6",
+             "978-0-987-65432-1",
+             "979-5-4321-0987-4",
+             "978-4-5678-9012-3",
+             "979-2-3456-7890-7",
+             "978-6-7890-1234-8",
+             "979-1-1111-2222-9",
+         })
+    {
+        a.emplace_back(isbn);
+    }
+
+    // convert
+    std::vector<std::string> before;
+    std::transform(a.cbegin(), a.cend(), std::back_inserter(before), convertToIsbn);
+    SPDLOG_INFO("before a: {}", fmt::format("{}", before));
+    std::sort(a.begin(), a.end(),
+              [](const Sales_data &lhs, const Sales_data &rhs) -> bool { return lhs.isbn() < rhs.isbn(); });
+    std::vector<std::string> after;
+    std::transform(a.cbegin(), a.cend(), std::back_inserter(after), convertToIsbn);
+    SPDLOG_INFO("after a: {}", fmt::format("{}", after));
+}
+
 int main(int argc, char *args[])
 {
     //
@@ -219,6 +251,7 @@ int main(int argc, char *args[])
     func_10_14();
     func_10_15();
     func_10_16();
+    func_10_17();
 
     return 0;
 }
