@@ -169,6 +169,17 @@ void func_10_13()
     SPDLOG_INFO("after a: {}", fmt::format("{}", a));
 }
 
+void func_10_14()
+{
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
+    //
+    auto lam = [](const int32_t a, const int32_t b) { return a + b; };
+    int32_t a = 2;
+    int32_t b = 3;
+    int32_t c = lam(a, b);
+    SPDLOG_INFO("a : {}, b: {}, c: {}", a, b, c);
+}
+
 int main(int argc, char *args[])
 {
     //
@@ -184,6 +195,7 @@ int main(int argc, char *args[])
     func_10_11();
     func_10_12();
     func_10_13();
+    func_10_14();
 
     return 0;
 }
