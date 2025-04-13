@@ -36,7 +36,7 @@ void draft()
 
 void func_10_1()
 {
-    SPDLOG_INFO("\n---------- func_10_1 ----------");
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
     const std::vector<int32_t> a = {1, 1, 2, 2, 2, 3};
     SPDLOG_INFO("a: {}", fmt::format("{}", a));
     const std::int32_t val = 2;
@@ -46,7 +46,7 @@ void func_10_1()
 
 void func_10_2()
 {
-    SPDLOG_INFO("\n---------- func_10_2 ----------");
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
     const std::vector<std::string> a = {"1", "1", "2", "2", "2", "3"};
     SPDLOG_INFO("a: {}", fmt::format("{}", a));
     const std::string val = "2";
@@ -56,7 +56,7 @@ void func_10_2()
 
 void func_10_3()
 {
-    SPDLOG_INFO("\n---------- func_10_3 ----------");
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
     const std::vector<int32_t> a = {1, 1, 2, 2, 2, 3};
     SPDLOG_INFO("a: {}", fmt::format("{}", a));
     const auto result = std::accumulate(a.cbegin(), a.cend(), 0);
@@ -65,7 +65,7 @@ void func_10_3()
 
 void func_10_6()
 {
-    SPDLOG_INFO("\n---------- func_10_6 ----------");
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
     std::vector<int32_t> a = {1, 1, 2, 2, 2, 3};
     SPDLOG_INFO("before a: {}", fmt::format("{}", a));
     //
@@ -75,7 +75,7 @@ void func_10_6()
 
 void func_10_7()
 {
-    SPDLOG_INFO("\n---------- func_10_7 ----------");
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
     std::list<int32_t> a = {1, 1, 2, 2, 2, 3};
     std::vector<int32_t> b;
     SPDLOG_INFO("before a: {}", fmt::format("{}", a));
@@ -94,7 +94,7 @@ void func_10_7()
 
 void func_10_9()
 {
-    SPDLOG_INFO("\n---------- func_10_9 ----------");
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
     auto elim_dups = [](std::vector<int32_t> &vec) -> void {
         std::sort(vec.begin(), vec.end());
         const auto unique_end = std::unique(vec.begin(), vec.end());
@@ -108,7 +108,7 @@ void func_10_9()
 
 void func_10_11()
 {
-    SPDLOG_INFO("\n---------- func_10_11 ----------");
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
     //
     auto is_shorter = [](const std::string &lhs, const std::string &rhs) -> bool { return lhs.size() < rhs.size(); };
     //
@@ -128,7 +128,7 @@ void func_10_11()
 
 void func_10_12()
 {
-    SPDLOG_INFO("\n---------- func_10_12 ----------");
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
     //
     auto compareIsbn = [](const Sales_data &lhs, const Sales_data &rhs) -> bool { return lhs.isbn() < rhs.isbn(); };
     auto convert2isbn = [](const Sales_data &sd) -> std::string { return sd.isbn(); };
@@ -161,7 +161,7 @@ void func_10_12()
 
 void func_10_13()
 {
-    SPDLOG_INFO("\n---------- func_10_13 ----------");
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
     //
     std::vector<std::string> a = {"the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"};
     SPDLOG_INFO("before a: {}", fmt::format("{}", a));
