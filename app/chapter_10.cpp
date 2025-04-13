@@ -245,6 +245,20 @@ void func_10_18()
     biggies_partition(words, sz);
 }
 
+void func_10_19()
+{
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
+    //
+    std::vector<std::string> words = {"the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"};
+    const std::size_t sz = 4;
+    SPDLOG_INFO("biggies...");
+    biggies(words, sz);
+    SPDLOG_INFO("biggies_partition...");
+    biggies_partition(words, sz);
+    SPDLOG_INFO("biggies_stable_partition...");
+    biggies_stable_partition(words, sz);
+}
+
 int main(int argc, char *args[])
 {
     //
@@ -265,6 +279,7 @@ int main(int argc, char *args[])
     func_10_16();
     func_10_17();
     func_10_18();
+    func_10_19();
 
     return 0;
 }
