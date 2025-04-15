@@ -272,6 +272,26 @@ void func_10_20()
     SPDLOG_INFO("The number of words with more than 4 characters is: {}", cnt);
 }
 
+void func_10_21()
+{
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
+    //
+    int32_t a = 3;
+    auto lam = [&a]() -> bool {
+        bool is_zero = (a == 0);
+        while (a > 0)
+        {
+            --a;
+        }
+        return is_zero;
+    };
+    SPDLOG_INFO("a={}", a);
+    SPDLOG_INFO("a is_zero: {}", lam());
+    SPDLOG_INFO("a={}", a);
+    SPDLOG_INFO("a is_zero: {}", lam());
+    SPDLOG_INFO("a={}", a);
+}
+
 int main(int argc, char *args[])
 {
     //
@@ -294,6 +314,7 @@ int main(int argc, char *args[])
     func_10_18();
     func_10_19();
     func_10_20();
+    func_10_21();
 
     return 0;
 }
