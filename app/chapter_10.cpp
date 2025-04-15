@@ -259,6 +259,19 @@ void func_10_19()
     biggies_stable_partition(words, sz);
 }
 
+void func_10_20()
+{
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
+    //
+    std::vector<std::string> words = {"the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"};
+    const std::size_t sz = 4;
+    SPDLOG_INFO("words: {}", fmt::format("{}", words));
+    SPDLOG_INFO("count_if...");
+    const auto cnt =
+        std::count_if(words.cbegin(), words.cend(), [](const std::string &s) -> bool { return s.size() > 4; });
+    SPDLOG_INFO("The number of words with more than 4 characters is: {}", cnt);
+}
+
 int main(int argc, char *args[])
 {
     //
@@ -280,6 +293,7 @@ int main(int argc, char *args[])
     func_10_17();
     func_10_18();
     func_10_19();
+    func_10_20();
 
     return 0;
 }
