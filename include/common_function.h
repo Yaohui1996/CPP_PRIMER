@@ -22,4 +22,6 @@ void biggies_stable_partition(std::vector<std::string> &words, const std::size_t
 
 std::string make_plural(const std::size_t ctr, const std::string &word, const std::string &ending);
 
+bool check_size(const std::string &s, std::string::size_type sz);
+
 #endif // YAOHUI_COMMON_FUNCTION_H

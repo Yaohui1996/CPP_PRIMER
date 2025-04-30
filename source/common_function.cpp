@@ -78,3 +78,8 @@ std::string make_plural(const std::size_t ctr, const std::string &word, const st
 {
     return (ctr > 1) ? word + ending : word;
 }
+
+bool check_size(const std::string &s, std::string::size_type sz)
+{
+    return s.size() > sz;
+}

@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cstdint>
+#include <functional>
 #include <iterator>
 #include <list>
 #include <numeric>
@@ -268,8 +269,8 @@ void func_10_20()
     SPDLOG_INFO("words: {}", fmt::format("{}", words));
     SPDLOG_INFO("count_if...");
     const auto cnt =
-        std::count_if(words.cbegin(), words.cend(), [](const std::string &s) -> bool { return s.size() > 4; });
-    SPDLOG_INFO("The number of words with more than 4 characters is: {}", cnt);
+        std::count_if(words.cbegin(), words.cend(), [sz](const std::string &s) -> bool { return s.size() > sz; });
+    SPDLOG_INFO("The number of words with more than {} characters is: {}", sz, cnt);
 }
 
 void func_10_21()
@@ -290,6 +291,19 @@ void func_10_21()
     SPDLOG_INFO("a={}", a);
     SPDLOG_INFO("a is_zero: {}", lam());
     SPDLOG_INFO("a={}", a);
+}
+
+void func_10_22()
+{
+    SPDLOG_INFO("\n---------- {} ----------", __func__);
+    //
+    std::vector<std::string> words = {"the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"};
+    const std::size_t sz = 4;
+    SPDLOG_INFO("words: {}", fmt::format("{}", words));
+    const auto cmp_func = std::bind(check_size, std::placeholders::_1, sz);
+    SPDLOG_INFO("count_if...");
+    const auto cnt = std::count_if(words.cbegin(), words.cend(), cmp_func);
+    SPDLOG_INFO("The number of words with more than {} characters is: {}", sz, cnt);
 }
 
 int main(int argc, char *args[])
@@ -315,6 +329,7 @@ int main(int argc, char *args[])
     func_10_19();
     func_10_20();
     func_10_21();
+    func_10_22();
 
     return 0;
 }
